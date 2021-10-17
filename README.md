@@ -31,6 +31,8 @@
 
 ## Setting up user authentication using Django-AllAuth
 
+### Install AllAuth
+
 1. Install Django-AllAuth use `pip3 install django-allauth`.  
     For this project to ensure the version of allauth installed is the same as the one used in the walkthrough project videos I will be using `pip3 install django-allauth==0.41.0`.
 2. Follow the [allauth documentation](https://django-allauth.readthedocs.io/en/latest/installation.html) to add the required settings to `settings.py`.
@@ -59,6 +61,15 @@
     - This time when you login you should get a 404 Error for page not found. This is becasue we haven't created the view for the home page yet and we set `LOGIN_REDIRECT_URL = '/'` in the `settings.py` file
     - If you get this error message you know allauth has been setup correctly
 6. Once you have confirmed allauth is working correctly use `pip3 freeze > requirements.txt` to create the `requirements.txt` file.
+
+### Customising the allauth templates
+
+To customise the allauth templates you first need to copy the default allauth templates from the site packages folder this can be done using the following command in the CLI:
+```
+cp -r ../.pip-modules/lib/python3.<VERSION_NUMBER>/site-packages/allauth/templates/* ./templates/allauth/
+```
+
+For this project we won't be customising the `openid` and `tests` templates so these folders can be deleted.
 
 ## Creating a model
 
