@@ -20,18 +20,15 @@
     - Run the Project locally to check it has been created correctly using:
         `python3 manage.py runserver`
 
-3. Create the app using:
-    `python3 manage.py startapp <PROJECT_NAME>`
-
 4. Run the first migrations to set up the app using:
     `python manage.py migrate`
 
 5. Create a superuser using:
     `python3 manage.py createsuperuser`
 
-## Setting up user authentication using Django-AllAuth
+### Setting up user authentication using Django-AllAuth
 
-### Install AllAuth
+#### Install AllAuth
 
 1. Install Django-AllAuth use `pip3 install django-allauth`.  
     For this project to ensure the version of allauth installed is the same as the one used in the walkthrough project videos I will be using `pip3 install django-allauth==0.41.0`.
@@ -62,7 +59,7 @@
     - If you get this error message you know allauth has been setup correctly
 6. Once you have confirmed allauth is working correctly use `pip3 freeze > requirements.txt` to create the `requirements.txt` file.
 
-### Customising the allauth templates
+#### Customising the allauth templates
 
 To customise the allauth templates you first need to copy the default allauth templates from the site packages folder this can be done using the following command in the CLI:
 ```
@@ -71,7 +68,12 @@ cp -r ../.pip-modules/lib/python3.<VERSION_NUMBER>/site-packages/allauth/templat
 
 For this project we won't be customising the `openid` and `tests` templates so these folders can be deleted.
 
-## Creating a model
+### Create home app
+
+- Create the app using:
+    `python3 manage.py startapp home`
+
+### Creating a model
 
 1. Create class in `models.py` 
     ``` python
