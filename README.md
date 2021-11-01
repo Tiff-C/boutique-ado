@@ -93,3 +93,25 @@ For this project we won't be customising the `openid` and `tests` templates so t
     python manage.py migrate
     ```
     to check what migrations will be made before running the command add `--plan` at the end.
+
+
+### Adding Contexts
+
+In this project we want the bag context to be available to all templates of the app. To do this we will be creating a *contexts.py* doc that will contain the `bag_contents()` fuction. This function will take the `request` parameter from django in the same way as the views for other apps; such as *products* or *home*. Instead of rendering a template however `bag_contents` will handle the free delivery logic and return a dictionary with the below format. 
+
+```python
+    context = {
+        'bag_items': bag_items,
+        'total': total,
+        'product_count': product_count,
+        'delivery': delivery,
+        'free_delivery_delta': free_delivery_delta,
+        'free_delivery_threshold': settings.FREE_DELIVERY_THRESHOLD,
+        'grand_total': grand_total,
+    }
+```
+
+In order for this context to be available to all views across the app it will need to be added to the project level `settings.py` file in the `templates` variable under *`context_processors`*. For this project that would be adding the following code:
+```python
+'bag.contexts.bag_contents',
+```
