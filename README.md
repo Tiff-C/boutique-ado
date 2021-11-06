@@ -115,3 +115,43 @@ In order for this context to be available to all views across the app it will ne
 ```python
 'bag.contexts.bag_contents',
 ```
+
+### Using the Django Shell
+
+When updating the products model to include `has_sizes` we set the default to `False`, to update items already loaded into the DB from the `fixtures.json` file you can use the Django shell command in the terminal. 
+```
+python3 manage.py shell
+```
+This creates a shell that is setup using all your application settings from the project level `settings.py` document. You can then write python code and can import any project functionality into the shell in the same way you would with a view.
+
+As the code used in the shell isn't saved anywhere once the shell is closed it is a great way to make changes to and explore the projects DB. 
+
+I have provided and example of the code used in the shell to update the `has_sizes` property for all clothing items below:
+```Python
+gitpod /workspace/boutique-ado $ python3 manage.py shell
+Python 3.8.12 (default, Sep 13 2021, 03:12:02) 
+Type 'copyright', 'credits' or 'license' for more information
+IPython 7.27.0 -- An enhanced Interactive Python. Type '?' for help.
+
+In [1]: from products.models import Product
+
+In [2]: kdbb = ['kitchen_dining', 'bed_bath']
+
+In [3]: clothes = Product.objects.exclude(category__name__in=kdbb)
+
+In [4]: clothes.count()
+Out[4]: 130
+
+In [5]: for item in clothes:
+   ...:     item.has_sizes = True
+   ...:     item.save()
+   ...: 
+
+In [6]: Product.objects.filter(has_sizes=True)
+Out[6]: <QuerySet [<Product: Arizona Original Bootcut Jeans>, <Product: Liz Claiborne Audra Classic Fit Straight Leg Pants>, <Product: The Foundry Supply Co. Solid Pocket TeeBig & Tall>, <Product: Liz Claiborne Classic Sophie Secretly Slender Trouser Leg Pants - Plus>, <Product: Chef Designs Black-Trimmed Cook ShirtBig & Tall>, <Product: Nike 3-pk. Performance Crew Socks - Boys>, <Product: Champion Jersey Tee>, <Product: Stafford 4-pk. Blended Cotton A-Shirts>, <Product: Stafford 4-pk. Heavyweight Crewneck T-ShirtsBig & Tall>, <Product: Levi's 529 Curvy Bootcut Jeans>, <Product: Worthington Essential Short-Sleeve Tee - Plus>, <Product: Silver Superman Shield Cufflinks>, <Product: Dickies Heavyweight Long-Sleeve Pocket Tee>, <Product: Dickies Heavyweight Fleece Full Zip HoodieBig & Tall>, <Product: Hanes 3pk. Cotton Crewneck TShirts  Big & Tall>, <Product: Armitron Now Womens Crystal-Accent White Leather Strap Watch>, <Product: Nike NA Swoosh Dri-FIT Cotton Tee>, <Product: Stafford Year-Round Pleated PantsBig & Tall>, <Product: Arizona Super-Skinny Jeans>, <Product: Nike 3-pk. Dri-FIT Fly Rise Crew Socks>, '...(remaining elements truncated)...']>
+
+In [7]: Product.objects.filter(has_sizes=True).count()
+Out[7]: 130
+
+In [8]: exit()
+```
