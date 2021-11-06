@@ -155,3 +155,5 @@ Out[7]: 130
 
 In [8]: exit()
 ```
+
+In the above example we haven't accounted for the items in the `clearence` and `deals` categories that don't need sizes. As these categories are a mix of clothing and non clothing items we will need to go into the site admin and update these individually.
