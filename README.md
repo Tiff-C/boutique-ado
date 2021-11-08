@@ -157,3 +157,7 @@ In [8]: exit()
 ```
 
 In the above example we haven't accounted for the items in the `clearance` and `deals` categories that don't need sizes. As these categories are a mix of clothing and non clothing items we will need to go into the site admin and update these individually.
+
+### Shortening Lines to ensure pep8 compliance
+
+To shorten the lines of code in my `bag/views.py` file I used the structure reccomended in this [article](https://note.nkmk.me/en/python-long-string/). This however threw a bug for a TypeError and I used this Stack Overflow [post](https://stackoverflow.com/questions/48881196/how-to-split-up-a-long-f-string-in-python) to fix the issue.
